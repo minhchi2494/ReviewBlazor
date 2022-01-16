@@ -1,0 +1,54 @@
+﻿@page "/details/{id:int}"
+@inject BlazorApp.Services.ICustomerAttributeService service;
+@using BlazorApp.Model;
+
+<h3>ContumerAttributeDetails</h3>
+
+<table class="table">
+    <tr>
+        <td>Attribute Master</td>
+        <td>@cust.AttributeMaster</td>
+    </tr>
+
+    <tr>
+        <td>Attribute Value Code</td>
+        <td>@cust.AttributeValuesCode</td>
+    </tr>
+
+    <tr>
+        <td>Description</td>
+        <td>@cust.Description</td>
+    </tr>
+
+    <tr>
+        <td>Short Name</td>
+        <td>@cust.ShortName</td>
+    </tr>
+
+    <tr>
+        <td>Parent</td>
+        <td>@cust.Parent</td>
+    </tr>
+
+    <tr>
+        <td>Effective Date</td>
+        <td>@cust.EffectiveDate</td>
+    </tr>
+
+    <tr>
+        <td>Valid Until</td>
+        <td>@cust.ValidUntil</td>
+    </tr>
+</table>
+
+@code {
+    CustomerAttributeModel cust = new CustomerAttributeModel();
+
+    [Parameter]
+    public int id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        cust = await service.getOne(id);
+    }
+}

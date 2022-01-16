@@ -1,0 +1,57 @@
+﻿@page "/index";
+
+<h3>CustomerAttributeView</h3>
+
+@if(model == null)
+{
+    <div>Loading...</div>
+}
+else
+{
+    <div class="row">
+        <EditForm Model="@customerSearch" OnSubmit="@SearchForm">
+            <div class="row">
+                <div class="col">
+                    <label>Attribute Master</label>
+                    <InputText class="form-control" @bind-Value="customerSearch.AttributeMaster"></InputText>
+                </div>
+
+                <div class="col pt-4">
+                    <button type="submit" class="btn btn-info">Search</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+
+
+    <div class="row mt-4">
+        <table class="table">
+            <thead>
+                <th>Attribute Master</th>
+                <th>Attribute Value Code</th>
+                <th>Description</th>
+                <th>Short Name</th>
+                <th>Parent</th>
+                <th>Effective Date</th>
+                <th>Valid Until</th>
+                <th></th>
+            </thead>
+
+            <tbody>
+                @foreach(var item in model)
+                {
+                    <tr>
+                        <td>@item.AttributeMaster</td>
+                        <td>@item.AttributeValuesCode</td>
+                        <td>@item.Description</td>
+                        <td>@item.ShortName</td>
+                        <td>@item.Parent</td>
+                        <td>@item.EffectiveDate</td>
+                        <td>@item.ValidUntil</td>
+                        <td><a href="/details/@item.Id" class="btn btn-success">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
